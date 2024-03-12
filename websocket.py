@@ -2,7 +2,7 @@
 import asyncio
 import websockets
 import json  # Import thư viện json để chuyển đổi từ điển thành chuỗi JSON
-
+import os
 # Danh sách các client được lưu trữ theo user_id
 clients = {}
 
@@ -38,7 +38,7 @@ async def echo(websocket, path):
 
 
 async def main():
-    async with websockets.serve(echo, "0.0.0.0", 8765):
+    async with websockets.serve(echo,host='', port=int(os.environ["PORT"])):
         await asyncio.Future()  # Run forever
 
 if __name__ == "__main__":
