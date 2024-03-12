@@ -38,7 +38,7 @@ async def echo(websocket, path):
 
 
 async def main():
-    async with websockets.serve(echo, "https://server-websocket-b808bc5aef93.herokuapp.com/", 8765):
+    async with websockets.serve(echo, "0.0.0.0", 8765):
         await asyncio.Future()  # Run forever
 
 if __name__ == "__main__":
