@@ -55,11 +55,7 @@ async def echo(websocket, path):
     await unregister(user_id)
 
 async def main():
-    # Run Flask app in a separate thread
-    loop = asyncio.get_event_loop()
-    loop.run_in_executor(None, app.run, '0.0.0.0', int(os.environ.get("PORT", 5000)), False)
-    # Start WebSocket server
-    async with websockets.serve(echo, '', int(os.environ.get("PORT", 5000))):
+    async with websockets.serve(echo,host='', port=int(os.environ["PORT"])):
         await asyncio.Future()  # Run forever
 
 if __name__ == "__main__":
