@@ -3,6 +3,28 @@ import asyncio
 import websockets
 import json  # Import thư viện json để chuyển đổi từ điển thành chuỗi JSON
 import os
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from gradio_client import Client
+
+app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
+client = Client("ShynBui/Vector_db_v3")
+
+# Flask app routes and functions
+@app.route("/predict", methods=["POST"])
+def predict():
+    data = request.json
+    result = client.predict(
+        quote=data['quote'],  # str in 'quote' Textbox component
+        history=data['history'],  # str in 'history' Textbox component
+        api_name="/predict"
+    )
+    if result:
+        return jsonify(result), 200
+    else:
+        return jsonify({"error": "Failed to connect to database"}), 500
+
 # Danh sách các client được lưu trữ theo user_id
 clients = {}
 
