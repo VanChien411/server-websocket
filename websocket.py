@@ -8,21 +8,21 @@ import os
 
 app = Flask(__name__)
 CORS(app)
-client = Client("ShynBui/Vector_db_v3")
+# client = Client("ShynBui/Vector_db_v3")
 
 # Flask app routes and functions
-@app.route("/predict", methods=["POST"])
-def predict():
-    data = request.json
-    result = client.predict(
-        quote=data['quote'],
-        history=data['history'],
-        api_name="/predict"
-    )
-    if result:
-        return jsonify(result), 200
-    else:
-        return jsonify({"error": "Failed to connect to database"}), 500
+# @app.route("/predict", methods=["POST"])
+# def predict():
+#     data = request.json
+#     result = client.predict(
+#         quote=data['quote'],
+#         history=data['history'],
+#         api_name="/predict"
+#     )
+#     if result:
+#         return jsonify(result), 200
+#     else:
+#         return jsonify({"error": "Failed to connect to database"}), 500
 
 # WebSocket server functions
 clients = {}
